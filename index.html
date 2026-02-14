@@ -1,32 +1,1200 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Earth</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <title>绿色地球 · 环保行动从现在开始</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="环保主题展示页面，倡导低碳生活、节能减排，一起守护我们的蓝色星球。" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-alt: #020617;
+      --card-bg: rgba(15, 23, 42, 0.9);
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.12);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: rgba(148, 163, 184, 0.3);
+      --danger: #f97316;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.9);
+      --radius-xl: 18px;
+      --radius-full: 999px;
+      --transition: 220ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #022c22 0, #020617 40%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* 顶部导航 */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.2), transparent);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .nav {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      font-size: 13px;
+      color: #e5f9ed;
+    }
+
+    .logo-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 20% 20%, #bbf7d0 0, #22c55e 45%, #166534 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 14px 30px rgba(22, 163, 74, 0.65);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-icon::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 10% 0, rgba(255, 255, 255, 0.7), transparent 55%);
+      opacity: .9;
+    }
+
+    .logo-icon span {
+      position: relative;
+      font-size: 17px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 3px;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 2px;
+      width: 0;
+      border-radius: 999px;
+      background: linear-gradient(to right, #22c55e, #a3e635);
+      transition: width var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: #e5f9ed;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      background: linear-gradient(to right, rgba(34, 197, 94, 0.12), rgba(8, 47, 35, 0.9));
+      color: #bbf7d0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.32);
+    }
+
+    .btn-primary {
+      font-size: 13px;
+      border-radius: var(--radius-full);
+      padding: 7px 14px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      background: radial-gradient(circle at 20% 0, #bbf7d0 0, #22c55e 40%, #16a34a 100%);
+      color: #052e16;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 18px 40px rgba(22, 163, 74, 0.6);
+      transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+    }
+
+    .btn-primary span.icon {
+      font-size: 16px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) scale(1.02);
+      filter: brightness(1.03);
+      box-shadow: 0 22px 50px rgba(22, 163, 74, 0.8);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0) scale(.99);
+      box-shadow: 0 10px 30px rgba(22, 163, 74, 0.65);
+    }
+
+    /* 主容器 */
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 26px 18px 40px;
+    }
+
+    /* Hero 区域 */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 36px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 820px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-left {
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: var(--radius-full);
+      padding: 5px 10px;
+      border: 1px solid rgba(52, 211, 153, 0.5);
+      background: radial-gradient(circle at 10% 0, rgba(34, 197, 94, 0.3), rgba(15, 23, 42, 0.9));
+      font-size: 11px;
+      color: #bbf7d0;
+      margin-bottom: 14px;
+    }
+
+    .hero-title {
+      font-size: clamp(30px, 5vw, 42px);
+      font-weight: 800;
+      letter-spacing: .02em;
+      margin-bottom: 12px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(to right, #bbf7d0, #4ade80);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 420px;
+      margin-bottom: 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .btn-ghost {
+      font-size: 13px;
+      border-radius: var(--radius-full);
+      padding: 7px 14px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition), color var(--transition), transform var(--transition);
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(96, 165, 250, 0.9);
+      color: #e5e7eb;
+      transform: translateY(-1px);
+      background: radial-gradient(circle at 0 0, rgba(59, 130, 246, 0.4), rgba(15, 23, 42, 0.9));
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    .hero-meta strong {
+      color: #d1fae5;
+      font-weight: 600;
+    }
+
+    .hero-right {
+      position: relative;
+    }
+
+    .earth-card {
+      position: relative;
+      border-radius: 26px;
+      padding: 18px 18px 16px;
+      background: radial-gradient(circle at 0 0, rgba(34, 197, 94, 0.4), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(52, 211, 153, 0.4);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      isolation: isolate;
+    }
+
+    .earth-orbit {
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0 0, rgba(52, 211, 153, 0.4), transparent 60%),
+        radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.5), transparent 55%),
+        radial-gradient(circle at 20% 90%, rgba(52, 211, 153, 0.4), transparent 60%);
+      opacity: .45;
+      filter: blur(16px);
+      z-index: -1;
+    }
+
+    .earth-main {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .earth-planet {
+      width: 120px;
+      height: 120px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 20% 20%, #f9fafb 0, #bbf7d0 20%, #22c55e 45%, #16a34a 60%, #022c22 100%);
+      position: relative;
+      box-shadow:
+        0 0 0 6px rgba(15, 23, 42, 0.9),
+        0 35px 55px rgba(6, 78, 59, 0.9);
+      overflow: hidden;
+    }
+
+    .earth-planet::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-radial-gradient(circle at 50% 60%, rgba(22, 163, 74, 0.15) 0 2px, transparent 3px 5px),
+        radial-gradient(circle at 80% 0, rgba(255, 255, 255, 0.8), transparent 60%);
+      mix-blend-mode: soft-light;
+      opacity: .8;
+    }
+
+    .earth-planet::after {
+      content: "";
+      position: absolute;
+      inset: 18%;
+      border-radius: 999px;
+      border: 2px solid rgba(34, 197, 94, 0.6);
+      box-shadow: 0 0 25px rgba(34, 197, 94, 0.9);
+    }
+
+    .earth-info-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .earth-info-subtitle {
+      font-size: 12px;
+      color: #e5e7eb;
+      margin-bottom: 10px;
+    }
+
+    .earth-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.85);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+    }
+
+    .chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .earth-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(148, 163, 184, 0.5);
+      font-size: 11px;
+      color: #e5e7eb;
+    }
+
+    .earth-metric {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .earth-metric span.value {
+      font-size: 15px;
+      font-weight: 700;
+      color: #bbf7d0;
+    }
+
+    .earth-metric span.label {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* 数据统计 */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    @media (max-width: 720px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .stats-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .stat-card {
+      border-radius: var(--radius-xl);
+      padding: 12px 14px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .stat-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      background: var(--accent-soft);
+      color: #bbf7d0;
+    }
+
+    .stat-tag.up::before {
+      content: "▲";
+      font-size: 10px;
+    }
+
+    .stat-tag.warning {
+      background: rgba(248, 171, 84, 0.16);
+      color: #fed7aa;
+    }
+
+    .section-title {
+      margin-top: 40px;
+      margin-bottom: 12px;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 650px;
+      margin-bottom: 18px;
+    }
+
+    /* 卡片网格：行动建议 */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 630px) {
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      border-radius: var(--radius-xl);
+      padding: 14px 14px 12px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(34, 197, 94, 0.12), transparent 60%);
+      opacity: .8;
+      pointer-events: none;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+    .card-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 20% 0, #bbf7d0 0, #22c55e 40%, #16a34a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      box-shadow: 0 10px 22px rgba(22, 163, 74, 0.6);
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .card-body {
+      position: relative;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .card-footer {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: #a5f3fc;
+      cursor: pointer;
+    }
+
+    .card-link span.icon {
+      font-size: 13px;
+    }
+
+    /* 时间线：个人行动计划 */
+    .timeline {
+      border-radius: var(--radius-xl);
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      padding: 18px 14px 14px;
+      background: radial-gradient(circle at 0 0, rgba(59, 130, 246, 0.3), rgba(15, 23, 42, 0.92));
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 800px) {
+      .timeline {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .timeline-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .timeline-subtitle {
+      font-size: 12px;
+      color: #e5e7eb;
+      margin-bottom: 10px;
+    }
+
+    .timeline-list {
+      list-style: none;
+      font-size: 12px;
+      color: var(--muted);
+      display: grid;
+      gap: 8px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .timeline-bullet {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(96, 165, 250, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+      background: rgba(15, 23, 42, 0.9);
+      box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.25);
+      margin-top: 2px;
+    }
+
+    .timeline-item strong {
+      color: #d1fae5;
+    }
+
+    .timeline-note {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .pledge-box {
+      border-radius: var(--radius-xl);
+      padding: 10px;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pledge-input-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pledge-input {
+      flex: 1;
+      min-width: 180px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      padding: 7px 11px;
+      font-size: 12px;
+      color: var(--text);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+    }
+
+    .pledge-input::placeholder {
+      color: #6b7280;
+    }
+
+    .pledge-input:focus {
+      border-color: rgba(52, 211, 153, 0.8);
+      box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.5);
+      background: #020617;
+    }
+
+    .pledge-btn {
+      border-radius: var(--radius-full);
+      border: none;
+      padding: 7px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      background: radial-gradient(circle at 10% 0, #bae6fd 0, #38bdf8 50%, #0ea5e9 100%);
+      color: #02131f;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 14px 32px rgba(56, 189, 248, 0.8);
+      transition: transform var(--transition), box-shadow var(--transition);
+      white-space: nowrap;
+    }
+
+    .pledge-btn span.icon {
+      font-size: 14px;
+    }
+
+    .pledge-btn:hover {
+      transform: translateY(-1px) scale(1.01);
+      box-shadow: 0 18px 45px rgba(56, 189, 248, 0.9);
+    }
+
+    .pledge-result {
+      font-size: 11px;
+      color: #a5f3fc;
+      min-height: 16px;
+    }
+
+    /* 底部 */
+    footer {
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      margin-top: 32px;
+      padding: 16px 18px 24px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      background: radial-gradient(circle at 50% 120%, rgba(22, 163, 74, 0.5), transparent 60%);
+    }
+
+    footer strong {
+      color: #bbf7d0;
+    }
+
+    .footer-links {
+      margin-top: 8px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .footer-links a {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .footer-links a:hover {
+      color: #e5e7eb;
+      text-decoration: underline;
+    }
+
+    /* 小动画 */
+    [data-fade] {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+    [data-fade].visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to Green Earth</h1>
-        <p>Your journey towards a greener lifestyle starts here!</p>
-    </header>
-    <main>
-        <section>
-            <h2>About Us</h2>
-            <p>At Green Earth, we promote eco-friendly practices and sustainable living.</p>
-        </section>
-        <section>
-            <h2>Services</h2>
-            <ul>
-                <li>Consulting</li>
-                <li>Workshops</li>
-                <li>Resources</li>
-            </ul>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 Green Earth. All rights reserved.</p>
-    </footer>
+  <header>
+    <nav class="nav">
+      <div class="logo">
+        <div class="logo-icon">
+          <span>🌍</span>
+        </div>
+        <span>GREEN·PLANET</span>
+      </div>
+      <div class="nav-links">
+        <a href="#action">行动倡议</a>
+        <a href="#timeline">个人计划</a>
+        <a href="#about">关于地球</a>
+      </div>
+      <div class="nav-cta">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          实时累积：<strong id="impact-counter">0</strong> 次环保承诺
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="about">
+      <div class="hero-left">
+        <div class="hero-eyebrow" data-fade>
+          <span>♻ 地球只有一个 · 环保从今天开始</span>
+        </div>
+        <h1 class="hero-title" data-fade>
+          用<span>一点点改变</span>，  
+          守护一整颗星球
+        </h1>
+        <p class="hero-subtitle" data-fade>
+          温室气体、塑料垃圾、极端气候……这些看似庞大的问题，背后都与我们每一次的消费、出行和选择息息相关。  
+          不是“他们”应该做点什么，而是“我们”可以做点什么。
+        </p>
+
+        <div class="hero-actions" data-fade>
+          <button class="btn-primary" id="scroll-to-action">
+            <span class="icon">✨</span>
+            我要参与行动
+          </button>
+          <button class="btn-ghost" id="scroll-to-timeline">
+            <span>查看我的 30 天绿色计划</span>
+          </button>
+        </div>
+
+        <div class="hero-meta" data-fade>
+          <span>已生成 <strong>1</strong> 个绿色网页 · 期待你的加入</span>
+          <span>·</span>
+          <span>平均每天减少 <strong>1% 碳足迹</strong>，一年就是 365% 的改变</span>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="earth-card" data-fade>
+          <div class="earth-orbit"></div>
+          <div class="earth-main">
+            <div class="earth-planet" aria-hidden="true"></div>
+            <div>
+              <div class="earth-info-title">我们的蓝色星球 · 正在发出提醒</div>
+              <div class="earth-info-subtitle">
+                气候变暖、冰川消融、海平面上升……  
+                “以后”已经悄悄变成“现在”。
+              </div>
+              <div class="earth-badges">
+                <div class="chip">
+                  <span class="chip-dot"></span>
+                  目标：升温控制在 1.5℃ 以内
+                </div>
+                <div class="chip">
+                  🌱 低碳生活 · 从你我开始
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="earth-footer">
+            <div class="earth-metric">
+              <span class="value" id="temp-value">+1.1℃</span>
+              <span class="label">相比工业化前全球平均温度</span>
+            </div>
+            <div class="earth-metric">
+              <span class="value" id="co2-value">> 36Gt</span>
+              <span class="label">人类每年二氧化碳排放量</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 数据区域 -->
+    <section aria-label="环保数据">
+      <div class="stats-grid">
+        <article class="stat-card" data-fade>
+          <div class="stat-label">🌳 每个人每年多种 1 棵树</div>
+          <div class="stat-value">≈ 7,000,000,000 棵</div>
+          <div class="stat-tag up">全球潜在碳汇显著提升</div>
+        </article>
+        <article class="stat-card" data-fade>
+          <div class="stat-label">🚶 每周 1 天步行 / 骑行</div>
+          <div class="stat-value">减少约 52 次通勤排放</div>
+          <div class="stat-tag up">既省油钱，也强健身体</div>
+        </article>
+        <article class="stat-card" data-fade>
+          <div class="stat-label">🥤 每日少用 1 个一次性杯子</div>
+          <div class="stat-value">一年减少 365 个塑料制品</div>
+          <div class="stat-tag warning">塑料可在环境中存在数百年</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 行动倡议 -->
+    <section id="action">
+      <h2 class="section-title" data-fade>五个简单的日常环保行动</h2>
+      <p class="section-subtitle" data-fade>
+        环保不是高难度的“任务”，而是你每天可以做的小选择。  
+        选其中一两条，坚持 30 天，你会发现环保其实一点也不遥远。
+      </p>
+
+      <div class="grid">
+        <article class="card" data-fade>
+          <div class="card-header">
+            <div class="card-icon">🚶</div>
+            <div class="card-title">低碳出行</div>
+          </div>
+          <div class="card-body">
+            尽量选择步行、骑行或公共交通，用脚步丈量城市，减少汽油车尾气排放。  
+            偶尔选择“不开车日”，和朋友一起尝试绿色出行。
+          </div>
+          <div class="card-footer">
+            <span>预计每年可减少数十公斤二氧化碳排放</span>
+            <span class="card-link">
+              <span>行动打卡</span>
+              <span class="icon">↗</span>
+            </span>
+          </div>
+        </article>
+
+        <article class="card" data-fade>
+          <div class="card-header">
+            <div class="card-icon">💧</div>
+            <div class="card-title">节约用水</div>
+          </div>
+          <div class="card-body">
+            关紧水龙头、缩短淋浴时间、使用节水设备。  
+            每节省 1 吨自来水，就意味着少消耗一次完整净水 / 供水过程中的能源。
+          </div>
+          <div class="card-footer">
+            <span>水资源紧张地区尤为重要</span>
+            <span class="card-link">
+              <span>今天就试试</span>
+              <span class="icon">↗</span>
+            </span>
+          </div>
+        </article>
+
+        <article class="card" data-fade>
+          <div class="card-header">
+            <div class="card-icon">🔌</div>
+            <div class="card-title">节能用电</div>
+          </div>
+          <div class="card-body">
+            不用的电器及时断电、空调调高 1℃、使用节能灯泡。  
+            每一点点电能的节省，都是对化石能源消耗的减少。
+          </div>
+          <div class="card-footer">
+            <span>家用电器是最容易改变的部分</span>
+            <span class="card-link">
+              <span>优化习惯</span>
+              <span class="icon">↗</span>
+            </span>
+          </div>
+        </article>
+
+        <article class="card" data-fade>
+          <div class="card-header">
+            <div class="card-icon">🛍️</div>
+            <div class="card-title">拒绝一次性用品</div>
+          </div>
+          <div class="card-body">
+            自带购物袋、随身杯、餐具，尽量避免一次性塑料袋、餐盒和吸管。  
+            每一次“说不”，都是在减少难以降解的白色垃圾。
+          </div>
+          <div class="card-footer">
+            <span>小改变 · 大减量</span>
+            <span class="card-link">
+              <span>准备环保随身包</span>
+              <span class="icon">↗</span>
+            </span>
+          </div>
+        </article>
+
+        <article class="card" data-fade>
+          <div class="card-header">
+            <div class="card-icon">🥦</div>
+            <div class="card-title">绿色饮食</div>
+          </div>
+          <div class="card-body">
+            合理减少浪费，适当增加蔬菜水果比例，尝试每周一顿“无肉日”。  
+            食物从农田到餐桌的过程，背后也藏着不小的碳排放。
+          </div>
+          <div class="card-footer">
+            <span>健康饮食 + 环保，一举两得</span>
+            <span class="card-link">
+              <span>计划本周菜单</span>
+              <span class="icon">↗</span>
+            </span>
+          </div>
+        </article>
+
+        <article class="card" data-fade>
+          <div class="card-header">
+            <div class="card-icon">♻️</div>
+            <div class="card-title">垃圾分类 & 循环利用</div>
+          </div>
+          <div class="card-body">
+            学会简单的垃圾分类规则，尽可能将纸张、金属、玻璃、塑料等可回收物送入再利用循环。  
+            二手物品流转，让“闲置”重新拥有价值。
+          </div>
+          <div class="card-footer">
+            <span>每一次分类，都是资源重生的机会</span>
+            <span class="card-link">
+              <span>整理一下家里</span>
+              <span class="icon">↗</span>
+            </span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 个人行动计划 -->
+    <section id="timeline">
+      <h2 class="section-title" data-fade>属于你的 30 天绿色行动计划</h2>
+      <p class="section-subtitle" data-fade>
+        不必一下子做到完美。从一件小事开始，让环保渐渐融入你的生活节奏。  
+        下面是一份可以直接照着做的小计划，也欢迎你随时修改成自己的版本。
+      </p>
+
+      <div class="timeline" data-fade>
+        <div>
+          <div class="timeline-title">从今天起 · 试试这样安排</div>
+          <div class="timeline-subtitle">每一阶段只专注 1～2 个改变，更容易坚持。</div>
+          <ul class="timeline-list">
+            <li class="timeline-item">
+              <div class="timeline-bullet">01</div>
+              <div>
+                <strong>第 1 周：觉察自己的“习惯碳足迹”</strong><br />
+                记录一周内的出行方式、外卖 / 打包次数、使用一次性用品的频率。  
+                先不着急改变，只是看清“原本的自己”。
+              </div>
+            </li>
+            <li class="timeline-item">
+              <div class="timeline-bullet">02</div>
+              <div>
+                <strong>第 2 周：选择一个最容易改的习惯</strong><br />
+                比如减少外卖、上下班多走几站路、自带水杯等。  
+                只要坚持做这一件事，就已经非常棒。
+              </div>
+            </li>
+            <li class="timeline-item">
+              <div class="timeline-bullet">03</div>
+              <div>
+                <strong>第 3 周：和身边的人分享</strong><br />
+                和家人、同事或朋友聊聊你做的小改变，邀请一个人和你一起试试。  
+                当环保变成“社交话题”，影响力会悄悄放大。
+              </div>
+            </li>
+            <li class="timeline-item">
+              <div class="timeline-bullet">04</div>
+              <div>
+                <strong>第 4 周：升级一项长期习惯</strong><br />
+                比如给家里的电器做一次“节能优化”、规划每月固定的无车日或断舍离日。  
+                让环保成为你生活方式的一部分，而不是短期活动。
+              </div>
+            </li>
+          </ul>
+          <p class="timeline-note">
+            ✅ 记住：没有人能做到 100% 完美的环保，但每一个愿意尝试的人，都值得被感谢。
+          </p>
+        </div>
+
+        <div>
+          <div class="pledge-box">
+            <div style="font-size: 12px; color:#e5e7eb; display:flex; justify-content:space-between; align-items:center; gap:10px;">
+              <span>写下你今天愿意做的一件小事，让这个承诺留在这里：</span>
+              <span style="font-size:11px; color:#4ade80;">💚 这只是本地记录，不会上传到服务器</span>
+            </div>
+            <div class="pledge-input-row">
+              <input
+                id="pledge-input"
+                class="pledge-input"
+                type="text"
+                maxlength="80"
+                placeholder="例如：本周上下班尽量乘坐地铁；今天开始自带水杯；这个月先不点一次性餐具……" />
+              <button class="pledge-btn" id="pledge-btn">
+                <span class="icon">✔</span>
+                我承诺
+              </button>
+            </div>
+            <div id="pledge-result" class="pledge-result"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <strong>绿色地球 · Green Planet</strong>  
+      <br />
+      这一页只是一个开始，真正改变世界的，是正在浏览它的你。
+    </div>
+    <div class="footer-links">
+      <a href="#about">回到顶部</a>
+      <a href="#action">日常行动</a>
+      <a href="#timeline">30 天计划</a>
+    </div>
+  </footer>
+
+  <script>
+    // 简单滚动
+    document.getElementById("scroll-to-action")?.addEventListener("click", function () {
+      document.getElementById("action")?.scrollIntoView({ behavior: "smooth" });
+    });
+
+    document.getElementById("scroll-to-timeline")?.addEventListener("click", function () {
+      document.getElementById("timeline")?.scrollIntoView({ behavior: "smooth" });
+    });
+
+    // 承诺输入 + 本地存储
+    (function () {
+      const input = document.getElementById("pledge-input");
+      const btn = document.getElementById("pledge-btn");
+      const result = document.getElementById("pledge-result");
+      const counter = document.getElementById("impact-counter");
+      const STORAGE_KEY_TEXT = "green_pledge_text";
+      const STORAGE_KEY_COUNT = "green_pledge_count";
+
+      function loadState() {
+        try {
+          const savedText = localStorage.getItem(STORAGE_KEY_TEXT);
+          const savedCount = localStorage.getItem(STORAGE_KEY_COUNT);
+          if (savedText && result) {
+            result.textContent = "你之前的承诺是：「" + savedText + "」";
+          }
+          if (savedCount && counter) {
+            counter.textContent = savedCount;
+          } else if (counter) {
+            counter.textContent = "1";
+          }
+        } catch (e) {
+          // localStorage 不可用就静默失败
+        }
+      }
+
+      function savePledge() {
+        if (!input || !result) return;
+        const value = input.value.trim();
+        if (!value) {
+          result.textContent = "先写下一件你愿意尝试的小事吧 🌱";
+          return;
+        }
+        result.textContent = "感谢你的承诺：「" + value + "」。这份改变，从现在开始生效。";
+        try {
+          localStorage.setItem(STORAGE_KEY_TEXT, value);
+          const prev = parseInt(localStorage.getItem(STORAGE_KEY_COUNT) || "1", 10) || 1;
+          const next = prev + 1;
+          localStorage.setItem(STORAGE_KEY_COUNT, String(next));
+          if (counter) counter.textContent = String(next);
+        } catch (e) {
+          // 忽略存储错误
+        }
+        input.value = "";
+      }
+
+      btn?.addEventListener("click", savePledge);
+      if (input) {
+        input.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            savePledge();
+          }
+        });
+      }
+
+      loadState();
+    })();
+
+    // 渐显动画（进入视口时）
+    (function () {
+      const elements = document.querySelectorAll("[data-fade]");
+      if (!("IntersectionObserver" in window)) {
+        elements.forEach(function (el) {
+          el.classList.add("visible");
+        });
+        return;
+      }
+
+      const observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      elements.forEach(function (el) {
+        observer.observe(el);
+      });
+    })();
+  </script>
 </body>
 </html>
